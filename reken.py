@@ -32,12 +32,11 @@ def animateLines(x, delay = 0.07):
         time.sleep(delay)
 
 
-def printSom(som):
+def strSom(som):
     if (som[2] == 1):
-        print(str(som[0]) + " - " + str(som[1]) + " = ", end = '')
+        return str(som[0]) + " - " + str(som[1]) + " = "
     else:
-        print(str(som[0]) + " + " + str(som[1]) + " = ", end = '')
-    sys.stdout.flush()
+        return str(som[0]) + " + " + str(som[1]) + " = "
 
 def printSplits(som, metExtras = False):
     if (som[2] == MIN_SOM):
@@ -75,15 +74,17 @@ def printBalk(curSom, amtSom):
     for x in range(amtSom - curSom + 1):
         print(".", end = '')
     print("| " + str(int((curSom - 1) / amtSom * 100)) + "%")
+
 som = getSom()
 clear()
 amtSom = 20 if len(sys.argv) < 2 else int(sys.argv[1])
 curSom = 1
 printBalk(curSom, amtSom)
-printSom(som)
+
 ans = None
 
-for line in sys.stdin:
+while True:
+    line = input(strSom(som))
     try:
         ans = int(line)
     except:
@@ -96,7 +97,7 @@ for line in sys.stdin:
         clear()
         for x in range(n):
             print(' ', end = '')
-        printSom(som)
+        print(strSom(som), end = '')
         print("?" if ans == -1 else str(ans), end = '')
         sys.stdout.flush()
         time.sleep(0.05)
@@ -138,5 +139,3 @@ for line in sys.stdin:
             animateLines(8, 0)
             time.sleep(3 if x == 8 else 0.1)
     printBalk(curSom, amtSom)
-
-    printSom(som)
