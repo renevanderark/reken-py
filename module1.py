@@ -1,7 +1,19 @@
 import time
 import sys
-from som import MIN_SOM, PLUS_SOM, strSom, checkSom
+from som import MIN_SOM, PLUS_SOM, strSom, checkSom, getAB, somSoort
 from termi import animateLines, clear, countDown
+
+def getSom(somKeus = None):
+    somType = somSoort(somKeus)
+    [a, b] = getAB(somType)
+    if somType == MIN_SOM:
+        while (a - b > 9):
+            [a, b] = getAB(somType)
+        return [a, b, somType]
+    else:
+        while (a + b < 11 or a == b):
+            [a, b] = getAB(somType)
+        return [a, b, somType]
 
 def printSplits(som, metExtras = False):
     if (som[2] == MIN_SOM):
@@ -13,17 +25,18 @@ def printSplits(som, metExtras = False):
     print("              │   │")
     if (metExtras):
         if (som[2] == PLUS_SOM):
-            print("          " + str(som[0]) + " + " + str(rest) + " + " + str(som[1] - rest))
+            print("          " + str(som[0]) + " + " + str(rest) + " + " + str(som[1] - rest) + " = ?")
         else:
-            print("         " + str(som[0]) + " - " + str(rest) + " - " + str(som[1] - rest))
+            print("         " + str(som[0]) + " - " + str(rest) + " - " + str(som[1] - rest) + " = ?")
     else:
         print("              " + str(rest) + "   " + str(som[1] - rest))
 
-def printHint(som):
+def printHint(som, foutCount):
     printSplits(som)
     animateLines(8)
     time.sleep(1.5)
-    for x in range(10):
+    y = 10 if foutCount < 2 else 9
+    for x in range(y):
         clear()
         printSplits(som, x % 2 == 0)
         animateLines(8, 0)

@@ -2,10 +2,11 @@
 
 import sys
 import time
-from som import strSom, PLUS_SOM, MIN_SOM, getSom
+from som import strSom, PLUS_SOM, MIN_SOM
 from termi import animateLines, clear, printBalk
-from module1 import printHint, animateSom, printSomFeedback
+import module1
 
+modules = [module1]
 
 clear()
 
@@ -21,10 +22,12 @@ if somKeusStr == '+':
 elif somKeusStr == '-':
     somKeus = MIN_SOM
 
-som = getSom(somKeus)
-curSom = 1
-printBalk(curSom, amtSom)
+mijnModule = modules[0]
 
+som = mijnModule.getSom(somKeus)
+curSom = 1
+foutCount = 0
+printBalk(curSom, amtSom)
 while True:
     try:
         inp = input(strSom(som))
@@ -34,9 +37,9 @@ while True:
     except:
         ans = -1
 
-    wasGoed = animateSom(som, ans)
+    wasGoed = mijnModule.animateSom(som, ans)
 
-    printSomFeedback(wasGoed)
+    mijnModule.printSomFeedback(wasGoed)
 
 
     clear()
@@ -47,9 +50,11 @@ while True:
             animateLines(11, 0.08)
             print(":)")
             break
-        som = getSom(somKeus)
+        som = mijnModule.getSom(somKeus)
         curSom += 1
+        foutCount = 0
     else:
-        printHint(som)
+        foutCount += 1
+        mijnModule.printHint(som, foutCount)
 
     printBalk(curSom, amtSom)
