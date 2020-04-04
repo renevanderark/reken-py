@@ -6,11 +6,8 @@ PLUS_SOM = 0
 def somSoort(somKeus):
     return random.randint(PLUS_SOM, MIN_SOM) if somKeus is None else somKeus
 
-def getAB(somType):
-    if (somType == MIN_SOM):
-        return [random.randint(11, 19), random.randint(1, 9)]
-    else:
-        return [random.randint(1, 9), random.randint(1, 9)]
+def getAB(aRngMin, aRngMax, bRngMin, bRngMax):
+    return [random.randint(aRngMin, aRngMax), random.randint(bRngMin, bRngMax)]
 
 def strSom(som):
     if (som[2] == MIN_SOM):

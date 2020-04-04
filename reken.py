@@ -3,17 +3,27 @@
 import sys
 import time
 from som import strSom, PLUS_SOM, MIN_SOM
-from termi import animateLines, clear, printBalk
+from termi import animateLines, clear, printBalk, DEFAULT_COLOR, setColor
 import module1
+import module2
 
-modules = [module1]
+modules = [module1, module2]
 
 clear()
+setColor(DEFAULT_COLOR)
+try:
+    moduleKeus = int(input("Moeilijkheid: 1 of 2? ")) - 1
+except:
+    moduleKeus = 0
+
+if (moduleKeus < 0 or moduleKeus > len(modules) - 1):
+    moduleKeus = 0
 
 try:
     amtSom = int(input("Hoe veel sommen wil je maken? "))
 except:
     amtSom = 20
+
 
 somKeusStr = input("Wat voor sommen wil je maken? + of - of ? ")
 somKeus = None
@@ -22,7 +32,7 @@ if somKeusStr == '+':
 elif somKeusStr == '-':
     somKeus = MIN_SOM
 
-mijnModule = modules[0]
+mijnModule = modules[moduleKeus]
 
 som = mijnModule.getSom(somKeus)
 curSom = 1

@@ -7,41 +7,43 @@ def getSom(somKeus = None):
     somType = somSoort(somKeus)
 
     if somType == MIN_SOM:
-        [a, b] = getAB(11, 19, 1, 9)
-        while (a - b > 9):
-            [a, b] = getAB(11, 19, 1, 9)
+        [a, b] = getAB(20, 50, 10, 30)
+        while (a < b or (a % 10) >= (b % 10) or a % 10 == 0 or b % 10 == 0):
+            [a, b] = getAB(20, 50, 10, 30)
         return [a, b, somType]
     else:
-        [a, b] = getAB(1, 9, 1, 9)
-        while (a + b < 11 or a == b):
-            [a, b] = getAB(1, 9, 1, 9)
+        [a, b] = getAB(10, 40, 10, 40)
+        while (a == b or (a % 10) + (b % 10) < 11):
+            [a, b] = getAB(10, 40, 10, 40)
         return [a, b, somType]
 
 def printSplits(som, metExtras = False):
+    teSplitsen = som[1] % 10
+    vanaf = som[1] - teSplitsen
     if (som[2] == MIN_SOM):
         rest = som[0] % 10
     else:
-        rest = 10 - som[0]
+        rest = 10 - (som[0] % 10)
 
-    print("                " + str(som[1]))
+
+    print("                " + str(teSplitsen))
     setColor(GREEN)
     print("              ╭─┴─╮")
     print("              │   │")
     setColor(DEFAULT_COLOR)
     if (metExtras):
         if (som[2] == PLUS_SOM):
-            print("          " + str(som[0]) + " + " + str(rest) + " + " + str(som[1] - rest) + " = ?")
+            print("         " + str(som[0]) + " + " + str(rest) + " + " + str(teSplitsen - rest) + " + " + str(vanaf) + " = ?")
         else:
-            print("         " + str(som[0]) + " - " + str(rest) + " - " + str(som[1] - rest) + " = ?")
+            print("         " + str(som[0]) + " - " + str(rest) + " - " + str(teSplitsen - rest) + " - " + str(vanaf) + " = ?")
     else:
-        print("              " + str(rest) + "   " + str(som[1] - rest))
+            print("              " + str(rest) + "   " + str(teSplitsen - rest))
 
 def printHint(som, foutCount):
     printSplits(som)
     animateLines(8)
     time.sleep(1.5)
-    y = 10 if foutCount < 2 else 9
-    for x in range(y):
+    for x in range(9):
         clear()
         printSplits(som, x % 2 == 0)
         animateLines(8, 0)
