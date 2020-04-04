@@ -11,10 +11,13 @@ def clear():
 
 def printBalk(curSom, amtSom):
     print("|", end = '')
+    setColor(GREEN)
     for x in range(curSom - 1):
         print("=", end = '')
+    setColor(RED)
     for x in range(amtSom - curSom + 1):
         print(".", end = '')
+    setColor(DEFAULT_COLOR)
     print("| " + str(int((curSom - 1) / amtSom * 100)) + "%")
 
 def countDown(amt):
@@ -22,3 +25,9 @@ def countDown(amt):
         print(str(x) + " ", end = '')
         sys.stdout.flush()
         time.sleep(0.7)
+
+DEFAULT_COLOR = "255"
+GREEN = "154"
+RED = "202"
+def setColor(code):
+    print(chr(27) + "[38;5;" + code + "m", end = "")
