@@ -14,8 +14,8 @@ def getAB(somType):
     else:
         return [random.randint(1, 9), random.randint(1, 9)]
 
-def getSom():
-    somType = random.randint(PLUS_SOM, MIN_SOM)
+def getSom(somKeus = None):
+    somType = random.randint(PLUS_SOM, MIN_SOM) if somKeus is None else somKeus
     [a, b] = getAB(somType)
     if somType == MIN_SOM:
         while (a - b > 9):
@@ -75,15 +75,29 @@ def printBalk(curSom, amtSom):
         print(".", end = '')
     print("| " + str(int((curSom - 1) / amtSom * 100)) + "%")
 
-som = getSom()
 clear()
-amtSom = 20 if len(sys.argv) < 2 else int(sys.argv[1])
+try:
+    amtSom = int(input("Hoe veel sommen wil je maken? "))
+except:
+    amtSom = 20
+
+somKeusStr = input("Wat voor sommen wil je maken? + of - of ? ")
+somKeus = None
+if somKeusStr == '+':
+    somKeus = PLUS_SOM
+elif somKeusStr == '-':
+    somKeus = MIN_SOM
+
+som = getSom(somKeus)
 curSom = 1
 printBalk(curSom, amtSom)
 
 while True:
     try:
-        ans = int(input(strSom(som)))
+        inp = input(strSom(som))
+        if inp == "q":
+            break
+        ans = int(inp)
     except:
         ans = -1
         print("kan ik niet parsen")
@@ -124,7 +138,7 @@ while True:
             animateLines(11, 0.08)
             print(":)")
             break
-        som = getSom()
+        som = getSom(somKeus)
         curSom += 1
     else:
         printSplits(som)
