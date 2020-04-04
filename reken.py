@@ -75,6 +75,12 @@ def printBalk(curSom, amtSom):
         print(".", end = '')
     print("| " + str(int((curSom - 1) / amtSom * 100)) + "%")
 
+def countDown(amt):
+    for x in range(amt, 0, -1):
+        print(str(x) + " ", end = '')
+        sys.stdout.flush()
+        time.sleep(0.7)
+
 clear()
 try:
     amtSom = int(input("Hoe veel sommen wil je maken? "))
@@ -120,16 +126,7 @@ while True:
         print(" --> is fout...")
 
     animateLines(8)
-
-    print("3 ", end = '')
-    sys.stdout.flush()
-    time.sleep(0.7)
-    print("2 ", end = '')
-    sys.stdout.flush()
-    time.sleep(0.7)
-    print("1 ", end = '')
-    sys.stdout.flush()
-    time.sleep(0.7)
+    countDown(3)
 
     clear()
     if wasGoed:
