@@ -81,12 +81,9 @@ amtSom = 20 if len(sys.argv) < 2 else int(sys.argv[1])
 curSom = 1
 printBalk(curSom, amtSom)
 
-ans = None
-
 while True:
-    line = input(strSom(som))
     try:
-        ans = int(line)
+        ans = int(input(strSom(som)))
     except:
         ans = -1
         print("kan ik niet parsen")
