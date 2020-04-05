@@ -37,6 +37,7 @@ mijnModule = modules[moduleKeus]
 som = mijnModule.getSom(somKeus)
 curSom = 1
 foutCount = 0
+clear()
 printBalk(curSom, amtSom)
 while True:
     try:
@@ -47,9 +48,11 @@ while True:
     except:
         ans = -1
 
-    wasGoed = mijnModule.animateSom(som, ans)
-
-    mijnModule.printSomFeedback(wasGoed)
+    if ans > -1:
+        wasGoed = mijnModule.animateSom(som, ans)
+        mijnModule.printSomFeedback(wasGoed)
+    else:
+        wasGoed = False
 
 
     clear()

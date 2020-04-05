@@ -39,13 +39,12 @@ def printSplits(som, metExtras = False):
 def printHint(som, foutCount):
     printSplits(som)
     animateLines(8)
-    time.sleep(1.5)
     y = 10 if foutCount < 2 else 9
     for x in range(y):
         clear()
         printSplits(som, x % 2 == 0)
         animateLines(8, 0)
-        time.sleep(3 if x == 8 else 0.1)
+        time.sleep(1 if x == 8 else 0.1)
 
 def animateSom(som, ans):
     wasGoed = checkSom(som, ans)
