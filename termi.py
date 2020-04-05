@@ -30,4 +30,7 @@ DEFAULT_COLOR = "255"
 GREEN = "154"
 RED = "202"
 def setColor(code):
-    print(chr(27) + "[38;5;" + code + "m", end = "")
+    print(getColor(code), end = "")
+
+def getColor(code):
+    return chr(27) + "[38;5;" + code + "m"
