@@ -37,6 +37,7 @@ mijnModule = modules[moduleKeus]
 som = mijnModule.getSom(somKeus)
 curSom = 1
 foutCount = 0
+foutSom = 0
 clear()
 printBalk(curSom, amtSom)
 while True:
@@ -58,9 +59,11 @@ while True:
     clear()
 
     if wasGoed:
+        foutSom += 1 if foutCount > 0 else 0
         if (curSom == amtSom):
             printBalk(curSom + 1, amtSom)
             animateLines(11, 0.08)
+            print("In 1x goed: " + str(amtSom - foutSom) + " van " + str(amtSom) + " sommen!")
             print(":)")
             break
         som = mijnModule.getSom(somKeus)

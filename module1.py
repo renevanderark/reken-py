@@ -17,24 +17,25 @@ def getSom(somKeus = None):
             [a, b] = getAB(1, 9, 1, 9)
         return [a, b, somType]
 
-def printSplits(som, metExtras = False):
+def printSplits(som, metExtras = False, lpad = 10, printTeSplitsen = True):
     if (som[2] == MIN_SOM):
         rest = som[0] % 10
     else:
         rest = 10 - som[0]
 
-    print("                " + str(som[1]))
+    if printTeSplitsen:
+        print((" " * lpad) + "      " + str(som[1]))
     setColor(GREEN)
-    print("              ╭─┴─╮")
-    print("              │   │")
+    print((" " * lpad) + "    ╭─┴─╮")
+    print((" " * lpad) + "    │   │")
     setColor(DEFAULT_COLOR)
     if (metExtras):
         if (som[2] == PLUS_SOM):
-            print("          " + str(som[0]) + " + " + str(rest) + " + " + str(som[1] - rest) + " = ?")
+            print((" " * lpad) + str(som[0]) + " + " + str(rest) + " + " + str(som[1] - rest) + " = ?")
         else:
-            print("         " + str(som[0]) + " - " + str(rest) + " - " + str(som[1] - rest) + " = ?")
+            print((" " * (lpad-1)) + str(som[0]) + " - " + str(rest) + " - " + str(som[1] - rest) + " = ?")
     else:
-        print("              " + str(rest) + "   " + str(som[1] - rest))
+        print((" " * lpad) + "    " + str(rest) + "   " + str(som[1] - rest))
 
 def printHint(som, foutCount):
     printSplits(som)
