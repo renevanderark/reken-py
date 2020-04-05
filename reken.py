@@ -9,7 +9,7 @@ import module2
 
 modules = [module1, module2]
 
-clear()
+animateLines(20)
 setColor(DEFAULT_COLOR)
 try:
     moduleKeus = int(input("Moeilijkheid: 1 of 2? ")) - 1
@@ -24,6 +24,7 @@ try:
 except:
     amtSom = 20
 
+amtSom = 20 if amtSom < 1 or amtSom > 100 else amtSom
 
 somKeusStr = input("Wat voor sommen wil je maken? + of - of ? ")
 somKeus = None

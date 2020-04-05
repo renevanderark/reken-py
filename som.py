@@ -23,3 +23,9 @@ def doSom(som):
 
 def checkSom(som, ans):
     return doSom(som) == ans
+
+def getTypeChar(type):
+    if type == MIN_SOM:
+        return "-"
+    else:
+        return "+"

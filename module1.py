@@ -1,6 +1,6 @@
 import time
 import sys
-from som import MIN_SOM, PLUS_SOM, strSom, checkSom, getAB, somSoort
+from som import MIN_SOM, PLUS_SOM, strSom, checkSom, getAB, somSoort, getTypeChar
 from termi import animateLines, clear, countDown, setColor, DEFAULT_COLOR, GREEN, RED
 
 def getSom(somKeus = None):
@@ -38,14 +38,31 @@ def printSplits(som, metExtras = False, lpad = 10, printTeSplitsen = True):
         print((" " * lpad) + "    " + str(rest) + "   " + str(som[1] - rest))
 
 def printHint(som, foutCount):
-    printSplits(som)
+    print(strSom(som))
     animateLines(8)
-    y = 10 if foutCount < 2 else 9
-    for x in range(y):
+    for x in range(9):
         clear()
-        printSplits(som, x % 2 == 0)
+        print(str(som[0]) + " " + getTypeChar(som[2]) + " ", end = "")
+        if x % 2 == 0:
+            print(str(som[1]) + " = ")
+        else:
+            print("  = ")
         animateLines(8, 0)
-        time.sleep(1 if x == 8 else 0.1)
+        time.sleep(0.2)
+
+    for x in range(9):
+        clear()
+        if x % 2 == 0:
+            print("       " + str(som[1]))
+        else:
+            print()
+        animateLines(2, 0)
+        print(strSom(som))
+        animateLines(8, 0)
+        time.sleep(0.2)
+    clear()
+    printSplits(som, True, 1)
+    animateLines(7, 0)
 
 def animateSom(som, ans):
     wasGoed = checkSom(som, ans)
